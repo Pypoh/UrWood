@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.profile.ProfileFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layout_account_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_200"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_akun_pembeli"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#707070"
+                android:padding="16dp"
+                android:text="Akun Pembeli"
+                app:shapeAppearance="@style/ButtonLeftCorner8" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_akun_penjual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="16dp"
+                android:text="Akun Penjual"
+                app:shapeAppearance="@style/ButtonRightCorner8" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_account_btn"
+            android:padding="32dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/rimg_profile_picture"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@color/purple_200"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/rimg_profile_picture"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_nama_toko_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Test_Nama_toko"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_desc_toko_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Desc_Nama_toko"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_profile_edit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_profile"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#707070"
+                android:padding="16dp"
+                android:text="Profil"
+                app:cornerRadius="0dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_edit_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="16dp"
+                android:text="Edit"
+                app:cornerRadius="0dp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_terakhir_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_profile_edit_btn"
+            android:padding="12dp"
+            android:paddingStart="16dp"
+            tools:ignore="RtlSymmetry">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="Terakhir Dilihat"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:src="@color/purple_200" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_favorit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_terakhir_profile"
+            android:padding="12dp"
+            android:paddingStart="16dp"
+            tools:ignore="RtlSymmetry">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="Favorite"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:src="@color/purple_200" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/border_profile"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_below="@id/layout_favorit_profile"
+            android:background="#707070" />
+
+        <RelativeLayout
+            android:id="@+id/layout_hubungin_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/border_profile"
+            android:padding="12dp"
+            android:paddingStart="16dp"
+            tools:ignore="RtlSymmetry">
+
+            <ImageView
+                android:id="@+id/icon_hubungi_profile"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentStart="true"
+                android:src="@color/purple_200" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_toRightOf="@id/icon_hubungi_profile"
+                android:text="Hubungi Kami"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:src="@color/purple_200" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_tentang_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_hubungin_profile"
+            android:padding="12dp"
+            android:paddingStart="16dp"
+            tools:ignore="RtlSymmetry">
+
+            <ImageView
+                android:id="@+id/icon_tentang_profile"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentStart="true"
+                android:src="@color/purple_200" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_toRightOf="@id/icon_tentang_profile"
+                android:text="Tentang"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:src="@color/purple_200" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_keluar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_tentang_profile"
+            android:padding="12dp"
+            android:paddingStart="16dp"
+            tools:ignore="RtlSymmetry">
+
+            <ImageView
+                android:id="@+id/icon_keluar_profile"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentStart="true"
+                android:src="@color/purple_200" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_toRightOf="@+id/icon_keluar_profile"
+                android:text="Keluar"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:src="@color/purple_200" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="#707070" />
+
+    </RelativeLayout>
+
+</FrameLayout>

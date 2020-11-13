@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.urwood.ui.main.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_promo"
+        android:name="com.example.urwood.ui.main.promo.PromoFragment"
+        android:label="@string/title_promo"
+        tools:layout="@layout/fragment_promo" />
+
+    <fragment
+        android:id="@+id/navigation_add"
+        android:name="com.example.urwood.ui.main.add_item.AddItemFragment"
+        android:label="@string/title_add_item"
+        tools:layout="@layout/fragment_add_item" />
+
+    <fragment
+        android:id="@+id/navigation_blog"
+        android:name="com.example.urwood.ui.main.blog.BlogFragment"
+        android:label="@string/title_blog"
+        tools:layout="@layout/fragment_blog" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.urwood.ui.main.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

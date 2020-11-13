@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "42774329173",
+    "firebase_url": "https://urwood-38635.firebaseio.com",
+    "project_id": "urwood-38635",
+    "storage_bucket": "urwood-38635.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42774329173:android:32db56cd672c964d5861dc",
+        "android_client_info": {
+          "package_name": "com.example.urwood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "42774329173-q2ispilphb314hgauuh83lgu4r3s7tu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1zl07MjCDvOxze-rCXVBvvO6l4Tkp-e4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "42774329173-q2ispilphb314hgauuh83lgu4r3s7tu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
