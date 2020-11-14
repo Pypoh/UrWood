@@ -1,16 +1,17 @@
 package com.example.urwood.ui.main.home.adapter
 
 import android.graphics.Rect
-import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class ProdukItemDecoration(
-    private var spanCount: Int,
-    private var spacing: Int,
-    private var includeEdge: Boolean,
-    private var headerNum: Int
-) : RecyclerView.ItemDecoration() {
+class ProdukItemDecoration(private val spacing: Int, private var displayMode: Int) :
+    RecyclerView.ItemDecoration() {
+    companion object {
+        const val HORIZONTAL: Int = 0
+        const val VERTICAL: Int = 1
+        const val GRID: Int = 2
+    }
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -18,33 +19,53 @@ class ProdukItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        super.getItemOffsets(outRect, view, parent, state)
-        val position = parent.getChildAdapterPosition(view) - headerNum
+        val position: Int = parent.getChildViewHolder(view).adapterPosition
+        val itemCount: Int = state.itemCount
+        val layoutManager = parent.layoutManager
+        setSpacingForDirection(outRect, layoutManager, position, itemCount)
+    }
 
-        if (position >= 0) {
-            val column: Int = position % spanCount
-            Log.d("RecyclerViewDebug", "True")
+    private fun setSpacingForDirection(
+        outRect: Rect,
+        layoutManager: RecyclerView.LayoutManager?,
+        position: Int,
+        itemCount: Int
+    ) {
+        if (displayMode == -1) {
+            displayMode = resolveDisplayMode(layoutManager)
+        }
 
-            if (includeEdge) {
-                outRect.left = spacing - column / spanCount
-                outRect.right = (column + 1) * spacing / spanCount
-
-                if (position < spanCount) {
-                    outRect.top = spacing
-                }
+        when (displayMode) {
+            HORIZONTAL -> {
+                outRect.left = spacing
+                outRect.right = if (position == itemCount - 1) spacing else 0
+                outRect.top = spacing
                 outRect.bottom = spacing
-            } else {
-                outRect.left = column * spacing / spanCount
-                outRect.right = spacing - (column + 1) * spacing / spanCount
-                if (position >= spanCount) {
+            }
+
+            VERTICAL -> {
+                outRect.left = spacing
+                outRect.right = spacing
+                outRect.top = spacing
+                outRect.bottom = if (position == itemCount - 1) spacing else 0
+            }
+
+            GRID -> {
+                if (layoutManager is GridLayoutManager) {
+                    val cols = layoutManager.spanCount
+                    val rows = itemCount / cols + 1
+                    outRect.left = spacing
+                    outRect.right = if (position % cols == cols - 1) spacing else 0
                     outRect.top = spacing
+                    outRect.bottom = if (position / cols == rows - 1) spacing else 0
                 }
             }
-        } else {
-            outRect.left = 0
-            outRect.right = 0
-            outRect.top = 0
-            outRect.bottom = 0
         }
+    }
+
+    private fun resolveDisplayMode(layoutManager: RecyclerView.LayoutManager?): Int {
+        if (layoutManager is GridLayoutManager) return GRID
+        if (layoutManager!!.canScrollHorizontally()) return HORIZONTAL
+        return VERTICAL
     }
 }

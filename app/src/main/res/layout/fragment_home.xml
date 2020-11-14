@@ -42,10 +42,10 @@
 
                     <ImageView
                         android:id="@+id/icon_location_home"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:layout_centerVertical="true"
-                        android:src="@color/purple_200" />
+                        android:src="@drawable/ic_pin" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
@@ -60,19 +60,20 @@
 
                     <ImageView
                         android:id="@+id/icon_notification_home"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:layout_centerVertical="true"
-                        android:layout_toLeftOf="@id/icon_chat_home"
-                        android:src="@color/purple_200" />
+                        android:layout_toStartOf="@id/icon_chat_home"
+                        android:src="@drawable/ic_bell" />
 
                     <ImageView
                         android:id="@+id/icon_chat_home"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@color/purple_200" />
+                        android:src="@drawable/ic_message_square"
+                        android:layout_marginStart="16dp"/>
                 </RelativeLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -81,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:endIconMode="clear_text"
-                    app:startIconDrawable="@drawable/email">
+                    app:startIconDrawable="@drawable/ic_md_search">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/iet_email_signup"
@@ -109,25 +110,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:id="@+id/ads_banner"
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/ads_banner_slider"
                     android:layout_width="match_parent"
                     android:layout_height="144dp"
-                    android:background="#707080"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sliderAnimationDuration="300"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderAutoCycleEnabled="true"
+                    app:sliderIndicatorAnimationDuration="300"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="16dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="4dp"
+                    app:sliderIndicatorRadius="2dp"
+                    app:sliderIndicatorSelectedColor="@color/brown_500"
+                    app:sliderIndicatorUnselectedColor="@color/white"
+                    app:sliderScrollTimeInSec="3"
+                    app:sliderStartAutoCycle="true"
+                    />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@id/ads_banner">
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/ads_banner_slider">
 
                     <TextView
                         android:id="@+id/text_kategori_home"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
                         android:text="@string/text_kategori"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -139,6 +152,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:paddingStart="8dp"
                         android:overScrollMode="never"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/text_kategori_home" />
@@ -147,7 +161,8 @@
                         android:id="@+id/text_toko_home"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
                         android:text="Toko"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -167,7 +182,8 @@
                         android:id="@+id/text_produk_home"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
                         android:text="Produk"
                         android:textSize="20sp"
                         android:textStyle="bold"

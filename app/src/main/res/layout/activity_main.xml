@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:borderWidth="2dp"
-        app:backgroundTint="@color/purple_500"
+        app:backgroundTint="@color/brown_500"
         android:backgroundTint="@color/white"
         app:elevation="8dp"
         app:layout_constraintBottom_toTopOf="@id/nav_view"

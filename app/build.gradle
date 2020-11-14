@@ -18,6 +18,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        vectorDrawables.useSupportLibrary = true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
@@ -81,4 +83,7 @@ dependencies {
 
     //Circle Image
     implementation 'de.hdodenhof:circleimageview:3.0.1'
+
+    // Image Slider
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
 }
