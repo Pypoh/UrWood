@@ -37,12 +37,12 @@ class CircleIconAdapter(
 
         when (dataCircleIcon.type) {
             0 -> {
-                dataCircleIcon.image?.let { holder.iconCircleIcon.setImageResource(it) }
+                dataCircleIcon.image?.let { holder.iconCircleIcon.setImageResource(it as Int) }
             }
             1 -> {
                 holder.imageKategori.visibility = View.VISIBLE
                 if (dataCircleIcon.image != null) {
-                    holder.imageKategori.setImageResource(dataCircleIcon.image!!)
+                    holder.imageKategori.setImageResource(dataCircleIcon.image!! as Int)
                     holder.iconCircleIcon.visibility = View.GONE
                 } else {
                     val formattedName = dataCircleIcon.name?.let { formatProfileName(it) }

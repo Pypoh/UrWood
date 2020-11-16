@@ -23,22 +23,22 @@ class SignupRepoImpl : ISignupRepo {
                 .createUserWithEmailAndPassword(email, password)
                 .await()
 
+            insertUserData(User.UserData(email))
+
             Resource.Success(data)
         } catch (e: FirebaseAuthException) {
             Resource.Failure(e)
         }
     }
 
-//    override fun insertUserData(name: String, email: String) {
-//        val userId = FirebaseAuth.getInstance().currentUser?.uid
-//        val userRef: DocumentReference = mRef.collection("users").document(userId.toString())
-//        val userModel = User.UserRegister(name, email)
-//        return try {
-//            val  data = userRef.set(userModel).addOnSuccessListener{
-//
-//            }
-//        } catch (e: FirebaseFirestoreException) {
-//
-//        }
-//    }
+    override suspend fun insertUserData(userData: User.UserData) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        val userRef: DocumentReference = mRef.collection("users").document(userId.toString())
+        return try {
+            val data = userRef.set(userData).await()
+        } catch (e: FirebaseFirestoreException) {
+
+        }
+    }
+
 }

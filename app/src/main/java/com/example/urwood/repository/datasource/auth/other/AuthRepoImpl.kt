@@ -28,4 +28,13 @@ class AuthRepoImpl : IAuthRepo {
             Resource.Failure(e)
         }
     }
+
+    override suspend fun logout(): Resource<FirebaseAuth?> {
+        return try {
+            mAuth.signOut()
+            Resource.Success(mAuth)
+        } catch (e: FirebaseAuthException) {
+            Resource.Failure(e)
+        }
+    }
 }

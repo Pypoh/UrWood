@@ -6,4 +6,5 @@ import com.google.firebase.auth.AuthResult
 
 interface ISignupRepo {
     suspend fun registerWithEmailAndPassword(email: String, password: String): Resource<AuthResult?>
+    suspend fun insertUserData(userData: User.UserData)
 }

@@ -7,4 +7,12 @@ object User {
         var password: String = ""
     )
 
+    data class UserData(
+        var email: String = "",
+        var name: String = "",
+        var phoneNumber: String = ""
+    ) {
+        constructor(email: String) : this(email, "", "")
+    }
+
 }

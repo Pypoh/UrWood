@@ -7,4 +7,6 @@ import com.google.firebase.auth.FirebaseUser
 interface IAuthRepo {
     suspend fun getAuthInstance(): Resource<FirebaseAuth>
     suspend fun getUserID(): Resource<FirebaseUser>
+
+    suspend fun logout(): Resource<FirebaseAuth?>
 }

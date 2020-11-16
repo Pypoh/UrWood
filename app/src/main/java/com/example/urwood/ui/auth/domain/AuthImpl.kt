@@ -8,4 +8,5 @@ import com.google.firebase.auth.FirebaseUser
 class AuthImpl(private val authRepository: IAuthRepo) : IAuth{
     override suspend fun getAuthInstance(): Resource<FirebaseAuth> = authRepository.getAuthInstance()
     override suspend fun getUserID(): Resource<FirebaseUser> = authRepository.getUserID()
+    override suspend fun logout(): Resource<FirebaseAuth?> = authRepository.logout()
 }

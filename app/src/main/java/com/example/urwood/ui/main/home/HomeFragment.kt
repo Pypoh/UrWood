@@ -1,5 +1,6 @@
 package com.example.urwood.ui.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,17 +9,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.urwood.R
 import com.example.urwood.databinding.FragmentHomeBinding
-import com.example.urwood.repository.datasource.main.home.HomeRepoImpl
+import com.example.urwood.repository.datasource.firestore.main.home.HomeRepoImpl
+import com.example.urwood.repository.datasource.firestore.product.api.ProductRepoImpl
 import com.example.urwood.repository.model.Home
+import com.example.urwood.repository.model.Product
 import com.example.urwood.ui.main.home.adapter.*
 import com.example.urwood.ui.main.home.domain.HomeImpl
-import com.example.urwood.utils.log
+import com.example.urwood.ui.product.detail.ProductDetailActivity
+import com.example.urwood.ui.product.domain.ProductImpl
+import com.example.urwood.utils.toast
+import com.example.urwood.utils.viewobject.Resource
+import com.google.gson.Gson
 import com.smarteist.autoimageslider.SliderView
 
 class HomeFragment : Fragment() {
@@ -28,9 +36,11 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by lazy {
         ViewModelProvider(
             this,
-            HomeVMFactory(HomeImpl(HomeRepoImpl()))
+            HomeVMFactory(HomeImpl(HomeRepoImpl()), ProductImpl(ProductRepoImpl()))
         ).get(HomeViewModel::class.java)
     }
+
+    private val gson = Gson()
 
     private lateinit var toolbar: Toolbar
     private lateinit var recyclerViewKategori: RecyclerView
@@ -40,7 +50,7 @@ class HomeFragment : Fragment() {
 
     private var dummyKategori = ArrayList<Home.CircleIcon>()
     private var dummyToko = ArrayList<Home.CircleIcon>()
-    private var dummyProduk = ArrayList<Home.Produk>()
+    private var dummyProduk = ArrayList<Product.ProductDetail>()
     private var dummyImageSlider = ArrayList<Home.Advertisement>()
 
     private var adapterKategori: CircleIconAdapter? = null
@@ -61,7 +71,6 @@ class HomeFragment : Fragment() {
 
         if (activity is AppCompatActivity) {
             (activity as AppCompatActivity).setSupportActionBar(toolbar)
-            requireContext().log("HomeViewDebug", "Toolbar Setup Complete")
         }
         toolbar.setTitleTextColor(requireContext().resources.getColor(R.color.white))
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.location_dummy)
@@ -86,15 +95,35 @@ class HomeFragment : Fragment() {
         // RecyclerView Produk
         recyclerViewProduk.layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerViewProduk.addItemDecoration(ProdukItemDecoration(16, -1))
-        adapterProduk = ProdukAdapter(requireContext(), dummyProduk)
+//        adapterProduk = ProdukAdapter(requireContext(), dummyProduk)
+        adapterProduk = ProdukAdapter(requireContext(), ArrayList())
         recyclerViewProduk.adapter = adapterProduk
+        adapterProduk!!.setOnItemClickListener(object : ProdukAdapter.OnItemClickListener {
+            override fun onItemClick(productDetailModel: Product.ProductDetail) {
+                requireContext().toast("Clicked")
+                // Intent to Detail Page
+                intentToDetail(productDetailModel)
+            }
+        })
 
         // Image Slider
         adapterAds = AdsSliderAdapter(requireContext(), dummyImageSlider)
         imageSliderAds.setSliderAdapter(adapterAds!!)
         imageSliderAds.startAutoCycle()
 
+        // Fetch Data
+        fetchProductData()
+
         return homeDataBinding.root
+    }
+
+    private fun intentToDetail(productDetailModel: Product.ProductDetail) {
+        val intent = Intent(this.context, ProductDetailActivity::class.java)
+        intent.putExtra(
+            "product",
+            gson.toJson(productDetailModel, Product.ProductDetail::class.java)
+        )
+        startActivity(intent)
     }
 
     private fun addDummyData() {
@@ -108,12 +137,32 @@ class HomeFragment : Fragment() {
         dummyToko.add(Home.CircleIcon("Kusen Jaya", null, 1))
         dummyToko.add(Home.CircleIcon("Kayuku", null, 1))
 
-        dummyProduk.add((Home.Produk("Gambar", "Lemari", 100000, false)))
-        dummyProduk.add((Home.Produk("Gambar", "Kursi", 100000, false)))
-        dummyProduk.add((Home.Produk("Gambar", "Meja", 100000, false)))
+//        dummyProduk.add((Product.ProductDetail("R.drawable.image_example_kursi", "Lemari", 100000, false)))
+//        dummyProduk.add((Product.ProductDetail("R.drawable.image_example_lampu", "Kursi", 100000, false)))
+//        dummyProduk.add((Product.ProductDetail("R.drawable.image_example_lemari", "Meja", 100000, false)))
+//        dummyProduk.add((Product.ProductDetail("R.drawable.image_example_meja", "Meja", 100000, false)))
 
         dummyImageSlider.add(Home.Advertisement(R.drawable.image_slider_example_1))
         dummyImageSlider.add(Home.Advertisement(R.drawable.image_slider_example_2))
+    }
+
+    private fun fetchProductData() {
+        homeViewModel.getProducts()
+        homeViewModel.productResult.observe(viewLifecycleOwner, Observer { task ->
+            when (task) {
+                is Resource.Loading -> {
+                }
+
+                is Resource.Success -> {
+                    adapterProduk?.setProductData(task.data!!)
+                    adapterProduk?.notifyDataSetChanged()
+                }
+
+                is Resource.Failure -> {
+
+                }
+            }
+        })
     }
 
     fun setupViewBinding(view: View) {

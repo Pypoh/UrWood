@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UrWood">
-        <activity android:name=".ui.product.detail.ProductDetailActivity"></activity>
+        <activity
+            android:name=".ui.product.detail.ProductDetailActivity"
+            android:theme="@style/MaterialTheme.NoActionBar" />
         <activity android:name=".ui.auth.AuthActivity" />
         <activity
             android:name=".ui.splash.SplashScreenActivity"
