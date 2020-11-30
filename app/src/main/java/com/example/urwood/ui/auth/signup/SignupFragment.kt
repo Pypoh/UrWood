@@ -122,10 +122,17 @@ class SignupFragment : Fragment() {
         })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (alertDialog.isShowing) {
+            alertDialog.dismiss()
+        }
+    }
+
     private fun handleSignup() {
         // Handle Register
         signupViewModel.registerWithEmailAndPassword()
-        signupViewModel.result.observe(viewLifecycleOwner, Observer { task ->
+        signupViewModel.result.observe(viewLifecycleOwner, { task ->
             when (task) {
                 is Resource.Loading -> {
                     if (!alertDialog.isShowing) alertDialog.show()

@@ -10,5 +10,5 @@ interface IProduct {
 
     suspend fun getAllProducts() : Resource<List<Product.ProductDetail>?>
 
-    suspend fun postProduct(product: Product.ProductDetail)
+    suspend fun postProduct(product: Product.ProductDetail) : Resource<Int>
 }

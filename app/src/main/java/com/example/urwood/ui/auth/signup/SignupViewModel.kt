@@ -1,5 +1,6 @@
 package com.example.urwood.ui.auth.signup
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,7 +30,8 @@ class SignupViewModel(private val useCase: ISignup) : ViewModel() {
                 )
                 emit(signupAuthResult)
             } catch (e: Exception) {
-                emit(Resource.Failure(e.cause!!))
+                Log.d("SignUpDebug", "Error: " + e.message)
+//                emit(Resource.Failure(e.cause!!))
             }
         }
     }

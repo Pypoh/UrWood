@@ -1,5 +1,6 @@
 package com.example.urwood.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.urwood.R
 import com.example.urwood.repository.model.Product
+import com.example.urwood.ui.product.add_product.AddProductActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -23,8 +25,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        // Dummy Testing
+//        // Dummy Testing
         navAddButton = findViewById(R.id.nav_button_add)
+        navAddButton.setOnClickListener {
+            intentToAddProduct()
+        }
 //        navAddButton.setOnClickListener {
 //            val dummyItems = ArrayList<Product.ProductDetail>()
 //            // Kursi
@@ -38,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 //                "toko1",
 //                4,
 //                23,
-//                ArrayList(),
+//                arrayListOf("Hitam", "Putih", "Coklat"),
 //                null
 //            ))
 //
@@ -53,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 //                "toko1",
 //                4,
 //                23,
-//                ArrayList(),
+//                arrayListOf("Hitam", "Putih", "Coklat", "Hitam", "Putih", "Coklat"),
 //                null
 //            ))
 //
@@ -68,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 //                "toko2",
 //                4,
 //                23,
-//                ArrayList(),
+//                arrayListOf("Hitam"),
 //                null
 //            ))
 //
@@ -84,6 +89,8 @@ class MainActivity : AppCompatActivity() {
 //                4,
 //                23,
 //                ArrayList(),
+//                "qDF416Nvn6OVXiGBBhgQPDLEkvu1",
+//                null,
 //                null
 //            ))
 //
@@ -104,5 +111,10 @@ class MainActivity : AppCompatActivity() {
         ))
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    private fun intentToAddProduct() {
+        val intent = Intent(this, AddProductActivity::class.java)
+        startActivity(intent)
     }
 }

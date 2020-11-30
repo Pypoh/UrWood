@@ -1,117 +1,302 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.product.detail.ProductDetailActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="productDetailViewModel"
+            type="com.example.urwood.ui.product.detail.ProductDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.product.detail.ProductDetailActivity">
 
-        <!-- Image Slider -->
-        <com.smarteist.autoimageslider.SliderView
-            android:id="@+id/image_slider_placeholder"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:background="#707070"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
-            app:sliderAnimationDuration="300"
-            app:sliderAutoCycleDirection="back_and_forth"
-            app:sliderAutoCycleEnabled="true"
-            app:sliderIndicatorAnimationDuration="300"
-            app:sliderIndicatorGravity="center_horizontal|bottom"
-            app:sliderIndicatorMargin="16dp"
-            app:sliderIndicatorOrientation="horizontal"
-            app:sliderIndicatorPadding="4dp"
-            app:sliderIndicatorRadius="2dp"
-            app:sliderIndicatorSelectedColor="@color/brown_500"
-            app:sliderIndicatorUnselectedColor="@color/white"
-            app:sliderScrollTimeInSec="3"
-            app:sliderStartAutoCycle="true" />
+            android:layout_height="0dp"
+            android:background="@color/grey_300"
+            app:layout_constraintBottom_toTopOf="@id/layout_bottom_button_product_detail"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_header_product_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@id/image_slider_placeholder">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_title_product_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Stuva/Fridits"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_price_product_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rp 1.125.000"
-                android:textSize="14sp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_title_product_detail" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:id="@+id/stars_product"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/brown_200"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_price_product_detail" />
-
-            <RelativeLayout
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:background="@color/brown_200"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="23 Terjual"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_detail_product_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@id/layout_header_product_detail">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_header_detail_product_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Detail Produk"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_description_product_detail"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_product_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Spesifikasi:\n120 x 40 x 180\n\n Bahan:\nPartikel Board Grade A 12mm"
-                app:layout_constraintTop_toBottomOf="@id/text_header_detail_product_detail" />
+                android:paddingBottom="24dp">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- Image Slider -->
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/image_slider_product_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:background="#707070"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:sliderAnimationDuration="300"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderAutoCycleEnabled="true"
+                    app:sliderIndicatorAnimationDuration="300"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="16dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="4dp"
+                    app:sliderIndicatorRadius="2dp"
+                    app:sliderIndicatorSelectedColor="@color/brown_500"
+                    app:sliderIndicatorUnselectedColor="@color/white"
+                    app:sliderScrollTimeInSec="3"
+                    app:sliderStartAutoCycle="true" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_header_product_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/image_slider_product_detail">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_title_product_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stuva/Fridits"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_price_product_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp 1.125.000"
+                        android:textSize="16sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_title_product_detail" />
+
+                    <LinearLayout
+                        android:id="@+id/stars_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_price_product_detail">
+
+                        <ImageView
+                            android:id="@+id/star_1_product_detail"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_star" />
+
+                        <ImageView
+                            android:id="@+id/star_2_product_detail"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_star" />
+
+                        <ImageView
+                            android:id="@+id/star_3_product_detail"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_star" />
+
+                        <ImageView
+                            android:id="@+id/star_4_product_detail"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_star" />
+
+                        <ImageView
+                            android:id="@+id/star_5_product_detail"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_star" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/text_rate_product_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="4.5"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@color/brown_200"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_sold_product_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="23 Terjual"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_detail_product_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/layout_header_product_detail">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_header_detail_product_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Detail Produk"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_description_product_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Spesifikasi:\n120 x 40 x 180\n\nBahan:\nPartikel Board Grade A 12mm"
+                        app:layout_constraintTop_toBottomOf="@id/text_header_detail_product_detail" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_variant_detail_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:padding="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_detail_product_detail">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_header_variant_product_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pilih"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_group_variant_product_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/text_header_variant_product_detail"
+                        app:singleSelection="true" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_store_detail_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:padding="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_variant_detail_product">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/image_store_product_detail"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="#707070"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_store_product_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Nama Toko"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toRightOf="@id/image_store_product_detail"
+                        app:layout_constraintTop_toTopOf="@id/image_store_product_detail" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_store_product_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintLeft_toRightOf="@id/image_store_product_detail"
+                        app:layout_constraintTop_toBottomOf="@id/text_store_product_detail">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_pin"
+                            app:tint="#707070" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/text_store_location_product_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="Kota Bekasi, Jawa Barat"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/layout_bottom_button_product_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_call_product_detail"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/orange_200"
+                android:drawableLeft="@drawable/ic_phone_call"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:text="Hubungi"
+                android:textAllCaps="false"
+                app:cornerRadius="0dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_chat_product_detail"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/green_200"
+                android:drawableLeft="@drawable/ic_message_square"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:text="Chat Penjual"
+                android:textAllCaps="false"
+                app:cornerRadius="0dp" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

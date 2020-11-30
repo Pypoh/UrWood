@@ -4,18 +4,36 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.UrWood">
+        android:supportsRtl="true">
+        <activity
+            android:name=".ui.chat.messages.MessageActivity"
+            android:theme="@style/MaterialTheme.NoActionBar" />
+        <activity android:name=".ui.chat.discussion.DiscussionActivity"
+            android:theme="@style/MaterialTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.main.profile.store.StoreActivity"
+            android:theme="@style/MaterialTheme.NoActionBar" />
+        <activity
+            android:name=".ui.product.add_product.AddProductActivity"
+            android:theme="@style/MaterialTheme.NoActionBar" />
+        <activity
+            android:name=".ui.main.profile.utils.ProfileEditActivity"
+            android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
             android:name=".ui.product.detail.ProductDetailActivity"
             android:theme="@style/MaterialTheme.NoActionBar" />
-        <activity android:name=".ui.auth.AuthActivity" />
+        <activity
+            android:name=".ui.auth.AuthActivity"
+            android:theme="@style/MaterialTheme.NoActionBar" />
         <activity
             android:name=".ui.splash.SplashScreenActivity"
             android:theme="@style/MaterialTheme.NoActionBar">

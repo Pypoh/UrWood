@@ -42,6 +42,7 @@ class AdsSliderAdapter(
         init {
             item = itemView
             image = itemView!!.findViewById(R.id.item_image_slider)
+            image!!.scaleType = ImageView.ScaleType.CENTER_CROP
         }
     }
 }

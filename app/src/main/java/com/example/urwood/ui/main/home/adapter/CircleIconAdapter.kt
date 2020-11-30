@@ -10,6 +10,7 @@ import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.urwood.R
 import com.example.urwood.repository.model.Home
+import com.example.urwood.utils.helper.Parser
 import com.google.android.material.textview.MaterialTextView
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -45,21 +46,12 @@ class CircleIconAdapter(
                     holder.imageKategori.setImageResource(dataCircleIcon.image!! as Int)
                     holder.iconCircleIcon.visibility = View.GONE
                 } else {
-                    val formattedName = dataCircleIcon.name?.let { formatProfileName(it) }
+                    val formattedName = dataCircleIcon.name?.let { Parser.formatProfileName(it) }
                     holder.textNoImage.text = formattedName
-                    holder.textKategori
+//                    holder.textKategori
                 }
             }
         }
-    }
-
-    private fun formatProfileName(name: String): String {
-        var formattedName = ""
-        val stringArray = name.split(" ").toTypedArray()
-        for (string in stringArray) {
-            formattedName += string.first()
-        }
-        return formattedName
     }
 
     override fun getItemCount(): Int {

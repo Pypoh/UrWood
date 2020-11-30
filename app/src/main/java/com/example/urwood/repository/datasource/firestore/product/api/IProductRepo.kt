@@ -1,6 +1,7 @@
 package com.example.urwood.repository.datasource.firestore.product.api
 
 import com.example.urwood.repository.model.Product
+import com.example.urwood.repository.model.User
 import com.example.urwood.utils.viewobject.Resource
 
 interface IProductRepo {
@@ -10,6 +11,8 @@ interface IProductRepo {
 
     suspend fun getAllProducts() : Resource<List<Product.ProductDetail>?>
 
-    suspend fun postProduct(product: Product.ProductDetail)
+    suspend fun postProduct(product: Product.ProductDetail) : Resource<Int>
+
+    suspend fun getProductStore(storeId: String, ownerId: String) : Resource<User.Store?>
 
 }

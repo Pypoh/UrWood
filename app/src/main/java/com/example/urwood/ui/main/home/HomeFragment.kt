@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
@@ -20,12 +21,14 @@ import com.example.urwood.repository.datasource.firestore.main.home.HomeRepoImpl
 import com.example.urwood.repository.datasource.firestore.product.api.ProductRepoImpl
 import com.example.urwood.repository.model.Home
 import com.example.urwood.repository.model.Product
+import com.example.urwood.ui.chat.discussion.DiscussionActivity
 import com.example.urwood.ui.main.home.adapter.*
 import com.example.urwood.ui.main.home.domain.HomeImpl
 import com.example.urwood.ui.product.detail.ProductDetailActivity
 import com.example.urwood.ui.product.domain.ProductImpl
-import com.example.urwood.utils.toast
 import com.example.urwood.utils.viewobject.Resource
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.smarteist.autoimageslider.SliderView
 
@@ -43,10 +46,13 @@ class HomeFragment : Fragment() {
     private val gson = Gson()
 
     private lateinit var toolbar: Toolbar
+    private lateinit var searchInputLayout: TextInputLayout
+    private lateinit var searchInputText: TextInputEditText
     private lateinit var recyclerViewKategori: RecyclerView
     private lateinit var recyclerViewToko: RecyclerView
     private lateinit var recyclerViewProduk: RecyclerView
     private lateinit var imageSliderAds: SliderView
+    private lateinit var toChatButton: ImageView
 
     private var dummyKategori = ArrayList<Home.CircleIcon>()
     private var dummyToko = ArrayList<Home.CircleIcon>()
@@ -100,7 +106,6 @@ class HomeFragment : Fragment() {
         recyclerViewProduk.adapter = adapterProduk
         adapterProduk!!.setOnItemClickListener(object : ProdukAdapter.OnItemClickListener {
             override fun onItemClick(productDetailModel: Product.ProductDetail) {
-                requireContext().toast("Clicked")
                 // Intent to Detail Page
                 intentToDetail(productDetailModel)
             }
@@ -133,7 +138,7 @@ class HomeFragment : Fragment() {
         dummyKategori.add(Home.CircleIcon("Lemari", R.drawable.ic_lemari, 0))
         dummyKategori.add(Home.CircleIcon("Hiasan", R.drawable.ic_hiasan, 0))
 
-        dummyToko.add(Home.CircleIcon("Ikea", R.drawable.ikea_logo, 1))
+        dummyToko.add(Home.CircleIcon("Mebel Kreasi", R.drawable.logo_mebel, 1))
         dummyToko.add(Home.CircleIcon("Kusen Jaya", null, 1))
         dummyToko.add(Home.CircleIcon("Kayuku", null, 1))
 
@@ -165,11 +170,26 @@ class HomeFragment : Fragment() {
         })
     }
 
-    fun setupViewBinding(view: View) {
+    private fun setupViewBinding(view: View) {
         toolbar = view.findViewById(R.id.toolbar)
         recyclerViewKategori = view.findViewById(R.id.recycler_kategori)
         recyclerViewToko = view.findViewById(R.id.recycler_toko)
         recyclerViewProduk = view.findViewById(R.id.recycler_produk)
         imageSliderAds = view.findViewById(R.id.ads_banner_slider)
+        searchInputLayout = view.findViewById(R.id.search_product_text_input_home)
+        searchInputLayout.clearFocus()
+        searchInputText = view.findViewById(R.id.iet_search_product_home)
+        searchInputText.clearFocus()
+
+        toChatButton = view.findViewById(R.id.icon_chat_home)
+        toChatButton.setOnClickListener {
+            intentToDiscussion()
+        }
+
+    }
+
+    private fun intentToDiscussion() {
+        val intent = Intent(this.context, DiscussionActivity::class.java)
+        startActivity(intent)
     }
 }
